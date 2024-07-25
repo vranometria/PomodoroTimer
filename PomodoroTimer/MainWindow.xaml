@@ -1,0 +1,17 @@
+﻿<Window x:Class="PomodoroTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PomodoroTimer"
+        mc:Ignorable="d"
+        Title="ポモドーロタイマー" Height="271" Width="344" Loaded="Window_Loaded">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="96" Margin="88,71,0,0" VerticalAlignment="Top" Width="139">
+            <Button x:Name="WorkButton" Content="Work" HorizontalAlignment="Left" Height="50" Margin="15,10,0,0" VerticalAlignment="Top" Width="50" Background="White" Click="WorkButton_Click"/>
+            <Button x:Name="BreakButton" Content="Break" HorizontalAlignment="Left" Height="50" Margin="70,10,0,0" VerticalAlignment="Top" Width="50" Background="White" Click="BreakButton_Click"/>
+            <Button x:Name="ResetButton" Content="Reset" Height="18" Margin="40,70,0,0" VerticalAlignment="Top" Background="Black" Foreground="White" HorizontalAlignment="Left" Width="50" Click="ResetButton_Click"/>
+        </Grid>
+        <Label x:Name="TimeLabel" Content="Time" HorizontalAlignment="Left" Margin="115,17,0,0" VerticalAlignment="Top" Height="49" Width="145" MouseDown="TimeLabel_MouseDown" FontSize="24"/>
+    </Grid>
+</Window>
