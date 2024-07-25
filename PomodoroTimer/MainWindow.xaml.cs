@@ -30,7 +30,7 @@ namespace PomodoroTimer
 
         private int WorkTime = 0;
 
-        private SoundPlayer SoundPlayer = new SoundPlayer("maou_se_system22.wav");
+        private SoundPlayer SoundPlayer = new SoundPlayer("ずんだもん.wav");
 
         public MainWindow()
         {

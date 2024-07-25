@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PomodoroTimer"
         mc:Ignorable="d"
-        Title="ポモドーロタイマー" Height="271" Width="344" Loaded="Window_Loaded">
+        Title="ポモドーロタイマー" Height="224" Width="242" Loaded="Window_Loaded">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="96" Margin="88,71,0,0" VerticalAlignment="Top" Width="139">
+        <Grid HorizontalAlignment="Center" Height="96" Margin="0,71,0,0" VerticalAlignment="Top" Width="138">
             <Button x:Name="WorkButton" Content="Work" HorizontalAlignment="Left" Height="50" Margin="15,10,0,0" VerticalAlignment="Top" Width="50" Background="White" Click="WorkButton_Click"/>
             <Button x:Name="BreakButton" Content="Break" HorizontalAlignment="Left" Height="50" Margin="70,10,0,0" VerticalAlignment="Top" Width="50" Background="White" Click="BreakButton_Click"/>
-            <Button x:Name="ResetButton" Content="Reset" Height="18" Margin="40,70,0,0" VerticalAlignment="Top" Background="Black" Foreground="White" HorizontalAlignment="Left" Width="50" Click="ResetButton_Click"/>
+            <Button x:Name="ResetButton" Content="Reset" Height="21" Margin="40,70,0,0" VerticalAlignment="Top" Background="Black" Foreground="White" HorizontalAlignment="Left" Width="55" Click="ResetButton_Click"/>
         </Grid>
-        <Label x:Name="TimeLabel" Content="Time" HorizontalAlignment="Left" Margin="115,17,0,0" VerticalAlignment="Top" Height="49" Width="145" MouseDown="TimeLabel_MouseDown" FontSize="24"/>
+        <Label x:Name="TimeLabel" Content="Time" Margin="10,17,10,0" VerticalAlignment="Top" Height="49" MouseDown="TimeLabel_MouseDown" FontSize="24" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>
