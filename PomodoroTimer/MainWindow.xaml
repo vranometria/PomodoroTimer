@@ -12,6 +12,11 @@
             <Button x:Name="BreakButton" Content="Break" HorizontalAlignment="Left" Height="50" Margin="70,10,0,0" VerticalAlignment="Top" Width="50" Background="White" Click="BreakButton_Click"/>
             <Button x:Name="ResetButton" Content="Reset" Height="21" Margin="40,70,0,0" VerticalAlignment="Top" Background="Black" Foreground="White" HorizontalAlignment="Left" Width="55" Click="ResetButton_Click"/>
         </Grid>
-        <Label x:Name="TimeLabel" Content="Time" Margin="10,17,10,0" VerticalAlignment="Top" Height="49" MouseDown="TimeLabel_MouseDown" FontSize="24" HorizontalContentAlignment="Center"/>
+        <Label x:Name="TimeLabel" Content="Time" Margin="10,26,10,0" VerticalAlignment="Top" Height="40" MouseDown="TimeLabel_MouseDown" FontSize="24" HorizontalContentAlignment="Center"/>
+        <Menu Height="21" VerticalAlignment="Top">
+            <MenuItem x:Name="OpenSettingWindowMenuItem" Header="Setting" Click="OpenSettingWindowMenuItem_Click">
+                <MenuItem/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

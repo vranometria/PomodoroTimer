@@ -1,4 +1,5 @@
-﻿using System.Media;
+﻿using System.IO;
+using System.Media;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,16 +19,19 @@ namespace PomodoroTimer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string SETTING_FILE = "setting.json";
+
         private DispatcherTimer WorkingTimer = new DispatcherTimer();
 
         private DispatcherTimer BreakTimer = new DispatcherTimer();
 
-        private DispatcherTimer NotifyTimer = new DispatcherTimer();
+        private DispatcherTimer NotifyTimer = new();
 
-        const int WORKTIME_LIMIT = 25 * 60;
+        private Setting Setting;
 
-        const int BREAKTIME_LIMIT = 5 * 60;
-
+        /// <summary>
+        /// 現在作業時間(秒)
+        /// </summary>
         private int WorkTime = 0;
 
         private SoundPlayer SoundPlayer = new SoundPlayer("ずんだもん.wav");
@@ -35,6 +39,21 @@ namespace PomodoroTimer
         public MainWindow()
         {
             InitializeComponent();
+
+            Setting = LoadSetting();
+        }
+
+        private static Setting LoadSetting()
+        {
+            if (File.Exists(SETTING_FILE))
+            {
+                return Util.ReadJsonFile(SETTING_FILE);
+            }
+            else
+            {
+                return new Setting();
+            }
+
         }
 
         /// <summary>
@@ -117,7 +136,7 @@ namespace PomodoroTimer
         private void Reset() 
         {
             WorkTime = 0;
-            ShowTime(WORKTIME_LIMIT);
+            ShowTime(Setting.WorkTime);
             InitWorkState();
             InitBreakState();
             InitNotifyState();
@@ -132,7 +151,7 @@ namespace PomodoroTimer
             BreakTimer.Interval = new TimeSpan(0, 0, 1);
             BreakTimer.Tick += BreakTimer_Tick;
 
-            NotifyTimer.Interval = new TimeSpan(0, 0, 2);
+            NotifyTimer.Interval = new TimeSpan(0, 0, Setting.VoiceDuration);
             NotifyTimer.Tick += NotifyTimer_Tick;
         }
 
@@ -171,8 +190,8 @@ namespace PomodoroTimer
         private void WorkingTimer_Tick(object? sender, EventArgs e)
         {
             WorkTime++;
-            ShowTime(WORKTIME_LIMIT - WorkTime);
-            if (WorkTime >= WORKTIME_LIMIT)
+            ShowTime(Setting.WorkTime * 60 - WorkTime);
+            if (WorkTime >= Setting.WorkTime * 60)
             {
                 InitWorkState();
                 StartNotify();
@@ -183,8 +202,8 @@ namespace PomodoroTimer
         private void BreakTimer_Tick(object? sender, EventArgs e)
         {
             WorkTime++;
-            ShowTime(BREAKTIME_LIMIT - WorkTime);
-            if (WorkTime >= BREAKTIME_LIMIT)
+            ShowTime(Setting.BreakTime * 60 - WorkTime);
+            if (WorkTime >= Setting.BreakTime * 60)
             {
                 InitBreakState();
                 StartNotify();
@@ -209,6 +228,17 @@ namespace PomodoroTimer
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             Reset();
+        }
+
+        private void OpenSettingWindowMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SettingWindow window = new(Setting);
+            if (window.ShowDialog() == true)
+            {
+                Setting = window.Setting;
+                Util.WriteJsonFile(SETTING_FILE, Setting);
+                NotifyTimer.Interval = new TimeSpan(0, 0, Setting.VoiceDuration);
+            }
         }
     }
 }
